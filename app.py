@@ -1236,6 +1236,7 @@ def search(
             <th>編集</th>
             <th>確認状態</th>
             <th>確認理由</th>
+            <th>削除</th>
         </tr>
     """
 
@@ -1325,9 +1326,17 @@ def search(
                 <a href="/edit/{db_id}">
                     編集
                 </a>
-            </td>
+            </td>        
             <td>{review_link}</td>
             <td>{db_review_reason or "-"}</td>
+            <td>
+                <a href="/delete/{db_id}"
+                class="action-btn"
+                style="background:#dc3545;"
+                onclick="return confirm('本当に削除しますか？');">
+                    削除
+                </a>
+            </td>
         </tr>
         """
 
@@ -2134,6 +2143,16 @@ def update_candidate_page(
     data["review_reason"] = review_reason
 
     update_candidate(data)
+
+    return RedirectResponse(
+        url="/search",
+        status_code=302
+    )
+
+@app.get("/delete/{candidate_id}")
+def delete_candidate_page(candidate_id: int):
+
+    delete_candidate(candidate_id)
 
     return RedirectResponse(
         url="/search",

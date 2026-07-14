@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+Lib/
+Include/
+Scripts/
+
+# Database
+*.db
+
+# Upload files
+uploads/*
+attachments/*
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
